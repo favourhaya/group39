@@ -5,12 +5,14 @@ import ReactMarkdown from "react-markdown";
 import { TranscriptItem } from "@/app/types";
 import Image from "next/image";
 import { useTranscript } from "@/app/contexts/TranscriptContext";
+import { v4 as uuidv4 } from "uuid";
 
 export interface TranscriptProps {
   userText: string;
   setUserText: (val: string) => void;
   onSendMessage: () => void;
   canSend: boolean;
+  sendClientEvent: (event: any, description?: string) => void;
 }
 
 function Transcript({
@@ -18,8 +20,9 @@ function Transcript({
   setUserText,
   onSendMessage,
   canSend,
+  sendClientEvent,
 }: TranscriptProps) {
-  const { transcriptItems, toggleTranscriptItemExpand } = useTranscript();
+  const { transcriptItems, toggleTranscriptItemExpand, addTranscriptMessage } = useTranscript();
   const transcriptRef = useRef<HTMLDivElement | null>(null);
   const [prevLogs, setPrevLogs] = useState<TranscriptItem[]>([]);
   const [justCopied, setJustCopied] = useState(false);
@@ -69,12 +72,51 @@ function Transcript({
   return (
     <div className="flex flex-col flex-1 bg-white min-h-0 rounded-xl">
       <div className="relative flex-1 min-h-0">
-        <button
-          onClick={handleCopyTranscript}
-          className={`absolute w-20 top-3 right-2 mr-1 z-10 text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300`}
-        >
-          {justCopied ? "Copied!" : "Copy"}
-        </button>
+        <div className="absolute top-3 right-24 z-10 flex gap-2">
+          <button
+            onClick={async () => {
+              try {
+                if (!transcriptRef.current) return;
+                
+                const transcriptText = transcriptRef.current.innerText;
+                
+                const analysisRequestId = uuidv4().slice(0, 32);
+                addTranscriptMessage(analysisRequestId, "user", "Please analyze this conversation.");
+                
+                // Send the analysis request
+                sendClientEvent({
+                  type: "conversation.item.create",
+                  item: {
+                    id: analysisRequestId,
+                    type: "message",
+                    role: "user",
+                    content: [{ 
+                      type: "input_text",
+                      text: `analyze_transcript ${JSON.stringify({ transcript: transcriptText })}`
+                    }],
+                  },
+                });
+                sendClientEvent({ type: "response.create" });
+              } catch (error) {
+                console.error("Analysis request failed:", error);
+                addTranscriptMessage(
+                  uuidv4().slice(0, 32),
+                  "assistant",
+                  "Sorry, I couldn't analyze the conversation due to a technical error."
+                );
+              }
+            }}
+            className="text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300"
+          >
+            Analyze
+          </button>
+          <button
+            onClick={handleCopyTranscript}
+            className={`text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300`}
+          >
+            {justCopied ? "Copied!" : "Copy"}
+          </button>
+        </div>
 
         <div
           ref={transcriptRef}
