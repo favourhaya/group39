@@ -510,6 +510,7 @@ function App() {
             sessionStatus === "CONNECTED" &&
             dcRef.current?.readyState === "open"
           }
+          sendClientEvent={sendClientEvent}
         />
 
         {/* <Events isExpanded={isEventsPaneExpanded} /> */}
