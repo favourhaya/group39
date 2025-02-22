@@ -62,7 +62,8 @@ graph_builder.set_entry_point("generate_scenario_context")
 
 graph_builder.add_edge("generate_scenario_context", "bob_chat")
 graph_builder.add_edge("bob_chat", "friend_chat")
-graph_builder.add_conditional_edges("friend_chat", check_chat_end, {"Fail": END, "Pass": "get_user_speech"})
+graph_builder.add_edge("friend_chat", "get_user_speech")
+graph_builder.add_edge("get_user_speech", END)
 
 graph = graph_builder.compile()
 
