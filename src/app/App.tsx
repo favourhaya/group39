@@ -9,6 +9,7 @@ import Image from "next/image";
 // UI components
 import Transcript from "./components/Transcript";
 import Events from "./components/Events";
+import Summary from "./components/Summary";
 import BottomToolbar from "./components/BottomToolbar";
 
 // Types
@@ -50,6 +51,8 @@ function App() {
   const [isPTTUserSpeaking, setIsPTTUserSpeaking] = useState<boolean>(false);
   const [isAudioPlaybackEnabled, setIsAudioPlaybackEnabled] =
     useState<boolean>(true);
+  
+  const [showSummary, setShowSummary] = useState(false);
 
   const sendClientEvent = (eventObj: any, eventNameSuffix = "") => {
     if (dcRef.current && dcRef.current.readyState === "open") {
@@ -94,7 +97,7 @@ function App() {
 
   useEffect(() => {
     if (selectedAgentName && sessionStatus === "DISCONNECTED") {
-      connectToRealtime();
+      // connectToRealtime();
     }
   }, [selectedAgentName]);
 
@@ -338,6 +341,7 @@ function App() {
     if (sessionStatus === "CONNECTED" || sessionStatus === "CONNECTING") {
       disconnectFromRealtime();
       setSessionStatus("DISCONNECTED");
+      setShowSummary(true);
     } else {
       connectToRealtime();
     }
@@ -401,13 +405,26 @@ function App() {
     }
   }, [isAudioPlaybackEnabled]);
 
-  const agentSetKey = searchParams.get("agentConfig") || "default";
+  // const agentSetKey = searchParams.get("agentConfig") || "default";
+  const agentSetKey = "simpleExample";
+  useEffect(() => setSelectedAgentName("haiku"))
+
 
   return (
     <div className="text-base flex flex-col h-screen bg-gray-100 text-gray-800 relative">
       <div className="p-5 text-lg font-semibold flex justify-between items-center">
         <div className="flex items-center">
-          <div onClick={() => window.location.reload()} style={{ cursor: 'pointer' }}>
+        {/* <div className="p-6"> */}
+          {/* <button
+            onClick={() => setShowSummary(true)}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          >
+            Open Summary
+          </button> */}
+
+          {showSummary && <Summary onClose={() => setShowSummary(false)} />}
+        {/* </div> */}
+          {/* <div onClick={() => window.location.reload()} style={{ cursor: 'pointer' }}>
             <Image
               src="/openai-logomark.svg"
               alt="OpenAI Logo"
@@ -415,16 +432,17 @@ function App() {
               height={20}
               className="mr-2"
             />
-          </div>
+          </div> */}
           <div>
-            Realtime API <span className="text-gray-500">Agents</span>
+            {/* Realtime API <span className="text-gray-500">Agents</span> */}
+            Our cool project
           </div>
         </div>
         <div className="flex items-center">
-          <label className="flex items-center text-base gap-1 mr-2 font-medium">
+          {/* <label className="flex items-center text-base gap-1 mr-2 font-medium">
             Scenario
-          </label>
-          <div className="relative inline-block">
+          </label> */}
+          {/* <div className="relative inline-block">
             <select
               value={agentSetKey}
               onChange={handleAgentChange}
@@ -445,9 +463,9 @@ function App() {
                 />
               </svg>
             </div>
-          </div>
+          </div> */}
 
-          {agentSetKey && (
+          {/* {agentSetKey && (
             <div className="flex items-center ml-6">
               <label className="flex items-center text-base gap-1 mr-2 font-medium">
                 Agent
@@ -479,7 +497,7 @@ function App() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -494,7 +512,7 @@ function App() {
           }
         />
 
-        <Events isExpanded={isEventsPaneExpanded} />
+        {/* <Events isExpanded={isEventsPaneExpanded} /> */}
       </div>
 
       <BottomToolbar
@@ -505,8 +523,8 @@ function App() {
         isPTTUserSpeaking={isPTTUserSpeaking}
         handleTalkButtonDown={handleTalkButtonDown}
         handleTalkButtonUp={handleTalkButtonUp}
-        isEventsPaneExpanded={isEventsPaneExpanded}
-        setIsEventsPaneExpanded={setIsEventsPaneExpanded}
+        // isEventsPaneExpanded={isEventsPaneExpanded}
+        // setIsEventsPaneExpanded={setIsEventsPaneExpanded}
         isAudioPlaybackEnabled={isAudioPlaybackEnabled}
         setIsAudioPlaybackEnabled={setIsAudioPlaybackEnabled}
       />
