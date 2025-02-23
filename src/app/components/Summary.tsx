@@ -21,34 +21,34 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
 
     const fetchSummary = async () => {
       try {
-        const transcript = [
-              {
-                "role": "assistant",
-                "content": "Hello! How are you today? What would you like to talk about? Maybe sports, music, or movies?"
-              },
-              {
-                "role": "user",
-                "content": "Ronaldo coolest swimmer. Brother of mine wants to be him"
-              },
-              {
-                "role": "assistant",
-                "content": "Did you mean: \"Ronaldo is the coolest football player. My brother wants to be like him.\"? Ronaldo is indeed a famous football (soccer) player! What does your brother admire about Ronaldo?"
-              },
-              {
-                "role": "user",
-                "content": "football not soccer"
-              },
-              {
-                "role": "assistant",
-                "content": "Got it! Football it is. Ronaldo is definitely a legendary football player. What qualities or skills of his does your brother find inspiring?"
-              },
-            ]
-        // const transcript = items
-        //     .filter(item => item.type === "MESSAGE") // Filter only MESSAGE types
-        //     .map(item => ({
-        //       role: item.role,
-        //       content: item.title
-        //     })); 
+        // const transcript = [
+        //       {
+        //         "role": "assistant",
+        //         "content": "Hello! How are you today? What would you like to talk about? Maybe sports, music, or movies?"
+        //       },
+        //       {
+        //         "role": "user",
+        //         "content": "Ronaldo coolest swimmer. Brother of mine wants to be him"
+        //       },
+        //       {
+        //         "role": "assistant",
+        //         "content": "Did you mean: \"Ronaldo is the coolest football player. My brother wants to be like him.\"? Ronaldo is indeed a famous football (soccer) player! What does your brother admire about Ronaldo?"
+        //       },
+        //       {
+        //         "role": "user",
+        //         "content": "football not soccer"
+        //       },
+        //       {
+        //         "role": "assistant",
+        //         "content": "Got it! Football it is. Ronaldo is definitely a legendary football player. What qualities or skills of his does your brother find inspiring?"
+        //       },
+        //     ]
+        const transcript = items
+            .filter(item => item.type === "MESSAGE") // Filter only MESSAGE types
+            .map(item => ({
+              role: item.role,
+              content: item.title
+            })); 
           
         const response = await fetch("/api/summary", {
             method: "POST",
