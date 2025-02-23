@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { TranscriptItem } from "../types";
 
+
 interface SummaryProps {
   onClose: () => void;
   items: TranscriptItem[];
@@ -67,7 +68,6 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
         console.log(transcript);
         console.log(data);
         
-        // console.log(items.filter());
         
         
       } catch (err) {
@@ -167,6 +167,19 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
             </div>
           </>
         )}
+
+        {/* Improvement Suggestions Section */}
+        {summaryData?.improvement_suggestions && summaryData.improvement_suggestions.length > 0 && (
+        <div className="mt-8 p-6 text-left">
+            <h3 className="text-lg font-bold text-gray-800 mb-4">Improvement Suggestions</h3>
+            <ol className="list-decimal list-inside text-gray-700 space-y-3">
+            {summaryData.improvement_suggestions.slice(0, 3).map((suggestion, index) => (
+                <li key={index}>{suggestion}</li>
+            ))}
+            </ol>
+        </div>
+        )}
+
   
         <button
           onClick={onClose}

@@ -30,6 +30,8 @@ const AnalysisSchema = z.object({
   
     conclusion: z.string(),
     rating: z.enum(["poor", "good", "excellent"]),
+  
+    improvement_suggestions: z.array(z.string()),
   });
 
 
@@ -55,9 +57,10 @@ Format your response like this:
 [Your overall summary here.] it should have a your this and this are good however your this could be better 
 this is only if there is anything positive or negative to say
 
-Give a rating based on the following criteria which should also be strict on the user and not be afraid to say that they are doing poor or less okay:
-we are trusting you with this rating. If you are nice, you will betray that trust and destroy our relationship.
+#rating
+Give a rating based on the following criteria which should also be lenient  and not nitpicky on the user but not be afraid to say that they are doing poor that is fundemetal in english:
 for the ratings the excellent  it should mimic an native english speaker. 
+if there are little to no comments to make on a category or if the said category is very good compared to the other feel freee to write very little about it
 
 
 #clarity 
@@ -76,13 +79,25 @@ for the ratings the excellent  it should mimic an native english speaker.
 Give an overall conclusion of how they can improve.
 
 
+
 # when and when to not add info
 
-if a field example fluency.correct_examples doesn't have enough information based on the info to be filled out to a very high standard turn it into an empty string
+if a field example fluency.correct_examples doesnt have enough information based on the info to be filled out to a very high standard turn it into an empty string
+
+
+
+
+#making the suggestions
+Lastly you should take away the key struggles of the user and give them a list of things they can do to improve their results
+          while giving them resources(with links) and practice excercises. when giving feedback we should 
+          eg.them strugling with past tense
+          give resources when available like "Read or listen to clear sentences daily" should also offer some sites for reading books and audiobooks
+          this recommendation should be concrete and not anything vague and try to use metrics whenever possible eg.Make an effort to learn new adjectives and verbs weekly to spice up your sentences and express yourself better.
+          the more metrics the better
+          try not to use words like a few or some try to give specific metrics. 
 
 
 # Notes
-- if there are little to no comments to make on a category or if the said category is very good compared to the other feel free to write very little or nothing about it
 - the response should be directed to the user and it should also be informal like talking to a friend
 - Ignore '[inaudible]' completely. It is a bug not from the user
 `,
