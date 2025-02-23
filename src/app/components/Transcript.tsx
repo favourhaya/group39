@@ -13,6 +13,8 @@ export interface TranscriptProps {
   onSendMessage: () => void;
   canSend: boolean;
   sendClientEvent: (event: any, description?: string) => void;
+  isPTTActive: boolean;
+  setIsPTTActive: (active: boolean) => void;
 }
 
 function Transcript({
@@ -21,6 +23,8 @@ function Transcript({
   onSendMessage,
   canSend,
   sendClientEvent,
+  isPTTActive,
+  setIsPTTActive,
 }: TranscriptProps) {
   const { transcriptItems, toggleTranscriptItemExpand, addTranscriptMessage } = useTranscript();
   const transcriptRef = useRef<HTMLDivElement | null>(null);
@@ -200,6 +204,21 @@ function Transcript({
       </div>
 
       <div className="p-4 flex items-center gap-x-2 flex-shrink-0 border-t border-gray-200">
+        <button
+          onClick={() => setIsPTTActive(!isPTTActive)}
+          className={`px-3 py-2 rounded-lg ${
+            isPTTActive 
+              ? "bg-gray-100 hover:bg-gray-200 text-gray-700" 
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
+        >
+          <Image 
+            src={isPTTActive ? "/mic.svg" : "/mic-off.svg"}
+            alt={isPTTActive ? "Muted" : "Unmuted"}
+            width={20}
+            height={20}
+          />
+        </button>
         <input
           ref={inputRef}
           type="text"
