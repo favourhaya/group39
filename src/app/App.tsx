@@ -354,38 +354,6 @@ function App() {
     setSelectedAgentName(newAgentName);
   };
 
-  // useEffect(() => {
-  //   const storedPushToTalkUI = localStorage.getItem("pushToTalkUI");
-  //   if (storedPushToTalkUI) {
-  //     setIsPTTActive(storedPushToTalkUI === "true");
-  //   }
-  //   const storedLogsExpanded = localStorage.getItem("logsExpanded");
-  //   if (storedLogsExpanded) {
-  //     setIsEventsPaneExpanded(storedLogsExpanded === "true");
-  //   }
-  //   const storedAudioPlaybackEnabled = localStorage.getItem(
-  //     "audioPlaybackEnabled"
-  //   );
-  //   if (storedAudioPlaybackEnabled) {
-  //     setIsAudioPlaybackEnabled(storedAudioPlaybackEnabled === "true");
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("pushToTalkUI", isPTTActive.toString());
-  // }, [isPTTActive]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("logsExpanded", isEventsPaneExpanded.toString());
-  // }, [isEventsPaneExpanded]);
-
-  // useEffect(() => {
-  //   localStorage.setItem(
-  //     "audioPlaybackEnabled",
-  //     isAudioPlaybackEnabled.toString()
-  //   );
-  // }, [isAudioPlaybackEnabled]);
-
   useEffect(() => {
     if (audioElementRef.current) {
       if (isAudioPlaybackEnabled) {
