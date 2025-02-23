@@ -95,11 +95,18 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
         ) : (
           <>
             {/* Rating Emoji Display */}
-            <div className="text-3xl mt-2">
-              {summaryData.rating === "excellent" ? "😊" : 
-               summaryData.rating === "good" ? "😐" : 
-               summaryData.rating === "poor" ? "☹️" : "❓"}
+            <div className="text-3xl mt-2 flex justify-center gap-4">
+            <span className={summaryData.rating === "poor" ? "opacity-100" : "opacity-50"}>
+                ☹️
+            </span>
+            <span className={summaryData.rating === "good" ? "opacity-100" : "opacity-50"}>
+                😐
+            </span>
+            <span className={summaryData.rating === "excellent" ? "opacity-100" : "opacity-50"}>
+                😊
+            </span>
             </div>
+
   
             {/* Scrollable Main Content (No extra scroll for the small boxes) */}
             <div className="text-gray-600 text-left max-h-[70vh] overflow-y-auto px-4">
