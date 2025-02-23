@@ -6,9 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // UI components
 import Transcript from "./components/Transcript";
-import Events from "./components/Events";
 import Summary from "./components/Summary";
-import BottomToolbar from "./components/BottomToolbar";
 import LandingPage from "./components/LandingPage";
 
 // Types
@@ -46,7 +44,7 @@ function App() {
   const [isEventsPaneExpanded, setIsEventsPaneExpanded] =
     useState<boolean>(true);
   const [userText, setUserText] = useState<string>("");
-  const [isPTTActive, setIsPTTActive] = useState<boolean>(false);
+  const [isPTTActive, setIsPTTActive] = useState<boolean>(true);
   const [isPTTUserSpeaking, setIsPTTUserSpeaking] = useState<boolean>(false);
   const [isAudioPlaybackEnabled, setIsAudioPlaybackEnabled] =
     useState<boolean>(true);
@@ -422,25 +420,7 @@ function App() {
     <div className="text-base flex flex-col h-screen bg-gray-100 text-gray-800 relative">
       <div className="p-5 text-lg font-semibold flex justify-between items-center">
         <div className="flex items-center">
-        {/* <div className="p-6"> */}
-          {/* <button
-            onClick={() => setShowSummary(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-          >
-            Open Summary
-          </button> */}
-
           {showSummary && <Summary onClose={handleSummaryClose} />}
-        {/* </div> */}
-          {/* <div onClick={() => window.location.reload()} style={{ cursor: 'pointer' }}>
-            <Image
-              src="/openai-logomark.svg"
-              alt="OpenAI Logo"
-              width={20}
-              height={20}
-              className="mr-2"
-            />
-          </div> */}
           <div>
             Our cool project
           </div>
@@ -457,7 +437,7 @@ function App() {
         </div>
       </div>
 
-      <div className="flex flex-1 gap-2 px-2 overflow-hidden relative">
+      <div className="flex flex-1 gap-2 px-2 pb-5 overflow-hidden relative">
         <Transcript
           userText={userText}
           setUserText={setUserText}
@@ -471,18 +451,6 @@ function App() {
           setIsPTTActive={setIsPTTActive}
         />
       </div>
-
-      <BottomToolbar
-        sessionStatus={sessionStatus}
-        onToggleConnection={onToggleConnection}
-        isPTTActive={isPTTActive}
-        setIsPTTActive={setIsPTTActive}
-        isPTTUserSpeaking={isPTTUserSpeaking}
-        handleTalkButtonDown={handleTalkButtonDown}
-        handleTalkButtonUp={handleTalkButtonUp}
-        isAudioPlaybackEnabled={isAudioPlaybackEnabled}
-        setIsAudioPlaybackEnabled={setIsAudioPlaybackEnabled}
-      />
     </div>
   );
 }
