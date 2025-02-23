@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, FC, PropsWithChildren } from "react";
+import React, { createContext, useContext, useState, FC, PropsWithChildren, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TranscriptItem } from "@/app/types";
 
@@ -16,7 +16,7 @@ type TranscriptContextValue = {
 
 const TranscriptContext = createContext<TranscriptContextValue | undefined>(undefined);
 
-export const TranscriptProvider: FC<PropsWithChildren> = ({ children }) => {
+export function TranscriptProvider({ children }: { children: React.ReactNode }) {
   const [transcriptItems, setTranscriptItems] = useState<TranscriptItem[]>([]);
 
   function newTimestampPretty(): string {
@@ -98,26 +98,26 @@ export const TranscriptProvider: FC<PropsWithChildren> = ({ children }) => {
     );
   };
 
-  const clearTranscript: TranscriptContextValue["clearTranscript"] = () => {
+  const clearTranscript = useCallback(() => {
     setTranscriptItems([]);
+  }, []);
+
+  const value = {
+    transcriptItems,
+    addTranscriptMessage,
+    updateTranscriptMessage,
+    addTranscriptBreadcrumb,
+    toggleTranscriptItemExpand,
+    updateTranscriptItemStatus,
+    clearTranscript,
   };
 
   return (
-    <TranscriptContext.Provider
-      value={{
-        transcriptItems,
-        addTranscriptMessage,
-        updateTranscriptMessage,
-        addTranscriptBreadcrumb,
-        toggleTranscriptItemExpand,
-        updateTranscriptItemStatus,
-        clearTranscript,
-      }}
-    >
+    <TranscriptContext.Provider value={value}>
       {children}
     </TranscriptContext.Provider>
   );
-};
+}
 
 export function useTranscript() {
   const context = useContext(TranscriptContext);
@@ -126,3 +126,10 @@ export function useTranscript() {
   }
   return context;
 }
+
+export type TranscriptContextType = {
+  transcriptItems: TranscriptItem[];
+  addTranscriptMessage: (itemId: string, role: string, title: string) => void;
+  toggleTranscriptItemExpand: (itemId: string) => void;
+  clearTranscript: () => void;
+};
