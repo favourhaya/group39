@@ -9,7 +9,7 @@ interface SummaryProps {
 }
 
 const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
-  const [summaryData, setSummaryData] = useState<string>("Loading summary...");
+  const [summaryData, setSummaryData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,26 +21,34 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
 
     const fetchSummary = async () => {
       try {
-        // const transcript = [
-        //       {
-        //         "role": "user",
-        //         "content": "Hello! How are you today?"
-        //       },
-        //       {
-        //         "role": "assistant",
-        //         "content": "I'm great! How can I assist you?"
-        //       },
-        //       {
-        //         "role": "user",
-        //         "content": "I need help with some coding questions."
-        //       }
-        //     ]
-        const transcript = items
-            .filter(item => item.type === "MESSAGE") // Filter only MESSAGE types
-            .map(item => ({
-              role: item.role,
-              content: item.title
-            })); 
+        const transcript = [
+              {
+                "role": "assistant",
+                "content": "Hello! How are you today? What would you like to talk about? Maybe sports, music, or movies?"
+              },
+              {
+                "role": "user",
+                "content": "Ronaldo coolest swimmer. Brother of mine wants to be him"
+              },
+              {
+                "role": "assistant",
+                "content": "Did you mean: \"Ronaldo is the coolest football player. My brother wants to be like him.\"? Ronaldo is indeed a famous football (soccer) player! What does your brother admire about Ronaldo?"
+              },
+              {
+                "role": "user",
+                "content": "football not soccer"
+              },
+              {
+                "role": "assistant",
+                "content": "Got it! Football it is. Ronaldo is definitely a legendary football player. What qualities or skills of his does your brother find inspiring?"
+              },
+            ]
+        // const transcript = items
+        //     .filter(item => item.type === "MESSAGE") // Filter only MESSAGE types
+        //     .map(item => ({
+        //       role: item.role,
+        //       content: item.title
+        //     })); 
           
         const response = await fetch("/api/summary", {
             method: "POST",
@@ -55,7 +63,7 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
           throw new Error(data.error || "Failed to fetch summary");
         }
 
-        setSummaryData(data.analysis.overall_summary);
+        setSummaryData(data.analysis);
         console.log(transcript);
         console.log(data);
         
@@ -74,18 +82,55 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
     
   }, []);
 
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md text-center">
-        <h2 className="text-2xl font-semibold mb-2">SUMMARY</h2>
-        <h3 className="text-lg text-gray-600 mb-4">Heading 1</h3>
+      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-5xl text-center">
+        <h2 className="text-2xl font-bold mb-2">SUMMARY REPORT</h2>
         
         {loading ? (
-          <p className="text-gray-700 mb-6">Loading summary...</p>
+          <p className="text-gray-600 b-6 py-10">Loading summary...</p>
         ) : error ? (
-          <p className="text-red-600 mb-6">{error}</p>
+          <p className="text-red-400 mb-6">{error}</p>
         ) : (
-          <p className="text-gray-700 mb-6">{summaryData}</p>
+            <div className="text-gray-600 mb-6 text-left">
+            <p className="text-center pb-5">{summaryData.overall_summary}</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Clarity Box */}
+                <div className="border border-gray-300 rounded-xl shadow-md">
+                <h3 className="bg-gray-400 p-2 text-white font-bold text-lg text-center rounded-t-xl">
+                    Clarity
+                </h3>
+                <div className="p-4">
+                    <p className="text-green-600 mb-4">✅ {summaryData.correct_clarity}</p>
+                    <p className="text-red-500 mb-4">❌ {summaryData.incorrect_clarity}</p>
+                </div>
+                </div>
+
+                {/* Coherence Box */}
+                <div className="border border-gray-300 rounded-xl shadow-md">
+                <h3 className="bg-gray-400 p-2 text-white font-bold text-lg text-center rounded-t-xl">
+                    Coherence
+                </h3>
+                <div className="p-4">
+                    <p className="text-green-600 mb-4">✅ {summaryData.correct_coherence}</p>
+                    <p className="text-red-500 mb-4">❌ {summaryData.incorrect_coherence}</p>
+                </div>
+                </div>
+
+                {/* Grammar Box */}
+                <div className="border border-gray-300 rounded-xl shadow-md">
+                <h3 className="bg-gray-400 p-2 text-white font-bold text-lg text-center rounded-t-xl">
+                    Grammar
+                </h3>
+                <div className="p-4">
+                    <p className="text-green-600 mb-4">✅ {summaryData.correct_grammar}</p>
+                    <p className="text-red-500 mb-4">❌ {summaryData.incorrect_grammar}</p>
+                </div>
+                </div>
+            </div>
+            </div>
         )}
 
         <button
