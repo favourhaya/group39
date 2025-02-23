@@ -209,11 +209,11 @@ function Transcript({
           className={`px-3 py-2 rounded-lg ${
             isPTTActive 
               ? "bg-gray-100 hover:bg-gray-200 text-gray-700" 
-              : "bg-blue-600 hover:bg-blue-700 text-white"
+              : "bg-gray-600 hover:bg-gray-700 text-white"
           }`}
         >
           <Image 
-            src={isPTTActive ? "/mic.svg" : "/mic-off.svg"}
+            src={isPTTActive ? "/mic-off.svg" : "/mic.svg"}
             alt={isPTTActive ? "Muted" : "Unmuted"}
             width={20}
             height={20}
