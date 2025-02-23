@@ -103,8 +103,14 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
                     Clarity
                 </h3>
                 <div className="p-4">
-                    <p className="text-green-600 mb-4">✅ {summaryData.correct_clarity}</p>
-                    <p className="text-red-500 mb-4">❌ {summaryData.incorrect_clarity}</p>
+                    {summaryData.correct_clarity ? 
+                        <p className="text-green-600 mb-4">✅ {summaryData.correct_clarity}</p>
+                        : <p></p>
+                    }
+                    {summaryData.incorrect_clarity ? 
+                        <p className="text-red-500 mb-4">❌ {summaryData.incorrect_clarity}</p>
+                        : <p></p>
+                    }
                 </div>
                 </div>
 
@@ -114,8 +120,14 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
                     Coherence
                 </h3>
                 <div className="p-4">
-                    <p className="text-green-600 mb-4">✅ {summaryData.correct_coherence}</p>
-                    <p className="text-red-500 mb-4">❌ {summaryData.incorrect_coherence}</p>
+                    {summaryData.correct_coherence ? 
+                        <p className="text-green-600 mb-4">✅ {summaryData.correct_coherence}</p>
+                        : <p></p>
+                    }
+                    {summaryData.incorrect_coherence ? 
+                        <p className="text-red-500 mb-4">❌ {summaryData.incorrect_coherence}</p>
+                        : <p></p>
+                    }
                 </div>
                 </div>
 
@@ -125,8 +137,14 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
                     Grammar
                 </h3>
                 <div className="p-4">
-                    <p className="text-green-600 mb-4">✅ {summaryData.correct_grammar}</p>
-                    <p className="text-red-500 mb-4">❌ {summaryData.incorrect_grammar}</p>
+                    {summaryData.correct_grammar ? 
+                        <p className="text-green-600 mb-4">✅ {summaryData.correct_grammar}</p>
+                        : <p></p>
+                    }
+                    {summaryData.incorrect_grammar ? 
+                        <p className="text-red-500 mb-4">❌ {summaryData.incorrect_grammar}</p>
+                        : <p></p>
+                    }
                 </div>
                 </div>
             </div>

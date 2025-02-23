@@ -434,7 +434,7 @@ function App() {
         </div>
       </div>
 
-      <div className="flex flex-1 gap-2 px-2 pb-5 overflow-hidden relative">
+      <div className="flex flex-1 gap-2 px-5 pb-5 overflow-hidden relative ">
         <Transcript
           userText={userText}
           setUserText={setUserText}
