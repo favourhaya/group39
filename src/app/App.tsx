@@ -446,6 +446,14 @@ function App() {
           </div>
         </div>
         <div className="flex items-center">
+          {sessionStatus === "CONNECTED" && (
+            <button
+              onClick={onToggleConnection}
+              className="px-4 py-2 rounded-lg font-medium bg-red-600 hover:bg-red-700 text-white"
+            >
+              End Conversation
+            </button>
+          )}
         </div>
       </div>
 
@@ -459,8 +467,9 @@ function App() {
             dcRef.current?.readyState === "open"
           }
           sendClientEvent={sendClientEvent}
+          isPTTActive={isPTTActive}
+          setIsPTTActive={setIsPTTActive}
         />
-
       </div>
 
       <BottomToolbar
