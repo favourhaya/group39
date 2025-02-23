@@ -426,7 +426,7 @@ function App() {
           {sessionStatus === "CONNECTED" && (
             <button
               onClick={onToggleConnection}
-              className="px-4 py-2 rounded-lg font-medium bg-red-600 hover:bg-red-700 text-white"
+              className="px-4 py-2 rounded-lg font-medium bg-red-600 shadow-md hover:shadow-lg transition-all hover:bg-red-700 text-white"
             >
               End Conversation
             </button>

@@ -15,7 +15,7 @@ function LandingPage({ onConnect }: LandingPageProps) {
         </p>
         <button
           onClick={onConnect}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-8 text-lg rounded-lg transition-colors"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-8 text-lg rounded-lg transition-colors shadow-lg hover:shadow-xl transition-shadow"
         >
           Start Practicing Now
         </button>

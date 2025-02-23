@@ -111,7 +111,7 @@ function Transcript({
                 );
               }
             }}
-            className="text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300"
+            className="text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300 shadow-md hover:shadow-md transition-all"
           >
             Analyze
           </button>
@@ -132,7 +132,7 @@ function Transcript({
               const isUser = role === "user";
               const baseContainer = "flex justify-end flex-col";
               const containerClasses = `${baseContainer} ${isUser ? "items-end" : "items-start"}`;
-              const bubbleBase = `max-w-lg p-3 rounded-xl ${isUser ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-black"}`;
+              const bubbleBase = `max-w-lg p-3 rounded-xl shadow-md ${isUser ? "bg-gray-900 text-gray-100" : "bg-white text-black"}`;
               const isBracketedMessage = title.startsWith("[") && title.endsWith("]");
               const messageStyle = isBracketedMessage ? "italic text-gray-400" : "";
               const displayTitle = isBracketedMessage ? title.slice(1, -1) : title;
