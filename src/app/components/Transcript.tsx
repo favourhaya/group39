@@ -148,17 +148,17 @@ function Transcript({
                   </div>
                 </div>
               );
-            } else {
-              // Fallback if type is neither MESSAGE nor BREADCRUMB
-              return (
-                <div
-                  key={itemId}
-                  className="flex justify-center text-gray-500 text-sm italic font-mono"
-                >
-                  Unknown item type: {type}{" "}
-                  <span className="ml-2 text-xs">{timestamp}</span>
-                </div>
-              );
+            // } else {
+            //   // Fallback if type is neither MESSAGE nor BREADCRUMB
+            //   return (
+            //     <div
+            //       key={itemId}
+            //       className="flex justify-center text-gray-500 text-sm italic font-mono"
+            //     >
+            //       Unknown item type: {type}{" "}
+            //       <span className="ml-2 text-xs">{timestamp}</span>
+            //     </div>
+            //   );
             }
           })}
         </div>
