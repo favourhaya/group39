@@ -80,8 +80,12 @@ Give an overall conclusion of how they can improve.
 
 if a field example fluency.correct_examples doesn't have enough information based on the info to be filled out to a very high standard turn it into an empty string
 
-if there are little to no comments to make on a category or if the said category is very good compared to the other feel free to write very little about it
-the response should be directed to the user and it should also be informal like talking to a friend`,
+
+# Notes
+- if there are little to no comments to make on a category or if the said category is very good compared to the other feel free to write very little or nothing about it
+- the response should be directed to the user and it should also be informal like talking to a friend
+- Ignore '[inaudible]' completely. It is a bug not from the user
+`,
         },
         // { role: "user", content: transcript },
         ...transcript

@@ -85,63 +85,75 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full min-w-md max-w-5xl text-center">
+      <div className="bg-white p-6 rounded-xl shadow-lg w-full min-w-md max-w-5xl text-center max-h-[90vh] overflow-y-auto">
         <h2 className="text-2xl font-bold mb-2">SUMMARY REPORT</h2>
-        
+  
         {loading ? (
           <p className="text-gray-600 b-6 py-10">Loading summary...</p>
         ) : error ? (
           <p className="text-red-400 mb-6">{error}</p>
         ) : (
-            <div className="text-gray-600 mb-6 text-left">
-            <p className="text-center pb-5">{summaryData.overall_summary}</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <>
+            {/* Rating Emoji Display */}
+            <div className="text-3xl mt-2">
+              {summaryData.rating === "excellent" ? "😊" : 
+               summaryData.rating === "good" ? "😐" : 
+               summaryData.rating === "poor" ? "☹️" : "❓"}
+            </div>
+  
+            {/* Scrollable Main Content (No extra scroll for the small boxes) */}
+            <div className="text-gray-600 text-left max-h-[70vh] overflow-y-auto px-4">
+              <p className="text-center pb-5">{summaryData.overall_summary}</p>
+  
+              {/* Small Boxes: No overflow here */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Clarity Box */}
                 <div className="border border-gray-300 rounded-xl shadow-md">
-                <h3 className="bg-gray-400 p-2 text-white font-bold text-lg text-center rounded-t-xl">
+                  <h3 className="bg-gray-800 p-2 text-white font-bold text-lg text-center rounded-t-xl">
                     Clarity
-                </h3>
-                <div className="p-4">
+                  </h3>
+                  <div className="p-4">
                     <p className="text-green-600 mb-4">✅ {summaryData.correct_clarity}</p>
                     <p className="text-red-500 mb-4">❌ {summaryData.incorrect_clarity}</p>
+                  </div>
                 </div>
-                </div>
-
+  
                 {/* Coherence Box */}
                 <div className="border border-gray-300 rounded-xl shadow-md">
-                <h3 className="bg-gray-400 p-2 text-white font-bold text-lg text-center rounded-t-xl">
+                  <h3 className="bg-gray-800 p-2 text-white font-bold text-lg text-center rounded-t-xl">
                     Coherence
-                </h3>
-                <div className="p-4">
+                  </h3>
+                  <div className="p-4">
                     <p className="text-green-600 mb-4">✅ {summaryData.correct_coherence}</p>
                     <p className="text-red-500 mb-4">❌ {summaryData.incorrect_coherence}</p>
+                  </div>
                 </div>
-                </div>
-
+  
                 {/* Grammar Box */}
                 <div className="border border-gray-300 rounded-xl shadow-md">
-                <h3 className="bg-gray-400 p-2 text-white font-bold text-lg text-center rounded-t-xl">
+                  <h3 className="bg-gray-800 p-2 text-white font-bold text-lg text-center rounded-t-xl">
                     Grammar
-                </h3>
-                <div className="p-4">
+                  </h3>
+                  <div className="p-4">
                     <p className="text-green-600 mb-4">✅ {summaryData.correct_grammar}</p>
                     <p className="text-red-500 mb-4">❌ {summaryData.incorrect_grammar}</p>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
-            </div>
+          </>
         )}
-
+  
         <button
           onClick={onClose}
-          className="w-full py-2 px-4 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition"
+          className="w-full py-2 px-4 mt-4 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition"
         >
           Close
         </button>
       </div>
     </div>
   );
+  
 };
 
 export default Summary;
