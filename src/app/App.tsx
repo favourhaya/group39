@@ -419,14 +419,14 @@ function App() {
         <div className="flex items-center">
           {showSummary && <Summary onClose={handleSummaryClose} items={transcriptItems} />}
           <div>
-            Our cool project
+            ConvoAI
           </div>
         </div>
         <div className="flex items-center">
           {sessionStatus === "CONNECTED" && (
             <button
               onClick={onToggleConnection}
-              className="px-4 py-2 rounded-lg font-medium bg-red-600 hover:bg-red-700 text-white"
+              className="px-4 py-2 rounded-lg font-medium bg-red-600 shadow-md hover:shadow-lg transition-all hover:bg-red-700 text-white"
             >
               End Conversation
             </button>
