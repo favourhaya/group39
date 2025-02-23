@@ -35,10 +35,14 @@ function LandingPage({ onConnect }: LandingPageProps) {
       <Tooltip 
         id="howToUseTooltip" 
         place="right" 
-        className="!bg-white !text-gray-800 !p-4 !rounded-xl !shadow-lg !max-w-md"
-        style={{ fontSize: '1rem', lineHeight: '1.5' }}
+        className="!bg-white !text-gray-800 !p-4 !rounded-xl !shadow-lg !max-w-md !opacity-100"
+        style={{ 
+          fontSize: '1rem', 
+          lineHeight: '1.5',
+          backgroundColor: 'white',
+        }}
       >
-        <div className="space-y-3">
+        <div className="space-y-3 bg-white">
           <h3 className="font-bold text-blue-600 mb-2">How to Use ConvoAI</h3>
           <ol className="list-decimal list-inside space-y-2">
             <li>Start a conversation with our AI</li>
