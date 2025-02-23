@@ -9,6 +9,7 @@ import Transcript from "./components/Transcript";
 import Events from "./components/Events";
 import Summary from "./components/Summary";
 import BottomToolbar from "./components/BottomToolbar";
+import LandingPage from "./components/LandingPage";
 
 // Types
 import { AgentConfig, SessionStatus } from "@/app/types";
@@ -51,6 +52,7 @@ function App() {
     useState<boolean>(true);
   
   const [showSummary, setShowSummary] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
 
   const sendClientEvent = (eventObj: any, eventNameSuffix = "") => {
     if (dcRef.current && dcRef.current.readyState === "open") {
@@ -402,12 +404,43 @@ function App() {
     }
   }, [isAudioPlaybackEnabled]);
 
+  const handleConnect = () => {
+    setShowLanding(false);
+    connectToRealtime();
+  };
+
+  const handleSummaryClose = () => {
+    setShowSummary(false);
+    setShowLanding(true);
+  };
+
+  if (showLanding) {
+    return <LandingPage onConnect={handleConnect} />;
+  }
 
   return (
     <div className="text-base flex flex-col h-screen bg-gray-100 text-gray-800 relative">
       <div className="p-5 text-lg font-semibold flex justify-between items-center">
         <div className="flex items-center">
-          {showSummary && <Summary onClose={() => setShowSummary(false)} />}
+        {/* <div className="p-6"> */}
+          {/* <button
+            onClick={() => setShowSummary(true)}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          >
+            Open Summary
+          </button> */}
+
+          {showSummary && <Summary onClose={handleSummaryClose} />}
+        {/* </div> */}
+          {/* <div onClick={() => window.location.reload()} style={{ cursor: 'pointer' }}>
+            <Image
+              src="/openai-logomark.svg"
+              alt="OpenAI Logo"
+              width={20}
+              height={20}
+              className="mr-2"
+            />
+          </div> */}
           <div>
             Our cool project
           </div>
