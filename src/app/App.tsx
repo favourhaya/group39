@@ -417,7 +417,7 @@ function App() {
     <div className="text-base flex flex-col h-screen bg-gray-100 text-gray-800 relative">
       <div className="p-5 text-lg font-semibold flex justify-between items-center">
         <div className="flex items-center">
-          {showSummary && <Summary onClose={handleSummaryClose} />}
+          {showSummary && <Summary onClose={handleSummaryClose} items={transcriptItems} />}
           <div>
             ConvoAI
           </div>
