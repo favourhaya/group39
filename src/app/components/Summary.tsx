@@ -106,7 +106,6 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
                 😊
             </span>
             </div>
-
   
             {/* Scrollable Main Content (No extra scroll for the small boxes) */}
             <div className="text-gray-600 text-left max-h-[70vh] overflow-y-auto px-4">
