@@ -71,15 +71,6 @@ function App() {
   });
 
   useEffect(() => {
-    // let finalAgentConfig = searchParams.get("agentConfig");
-    // let finalAgentConfig = "simpleExample"
-    // if (!finalAgentConfig || !allAgentSets[finalAgentConfig]) {
-    //   finalAgentConfig = defaultAgentSetKey;
-    //   const url = new URL(window.location.toString());
-    //   url.searchParams.set("agentConfig", finalAgentConfig);
-    //   window.location.replace(url.toString());
-    //   return;
-    // }
 
     let finalAgentConfig = defaultAgentSetKey;
     const agents = allAgentSets[finalAgentConfig];
@@ -307,28 +298,6 @@ function App() {
 
     sendClientEvent({ type: "response.create" }, "trigger response");
   };
-
-  // const handleTalkButtonDown = () => {
-  //   if (sessionStatus !== "CONNECTED" || dataChannel?.readyState !== "open")
-  //     return;
-  //   cancelAssistantSpeech();
-
-  //   setIsPTTUserSpeaking(true);
-  //   sendClientEvent({ type: "input_audio_buffer.clear" }, "clear PTT buffer");
-  // };
-
-  // const handleTalkButtonUp = () => {
-  //   if (
-  //     sessionStatus !== "CONNECTED" ||
-  //     dataChannel?.readyState !== "open" ||
-  //     !isPTTUserSpeaking
-  //   )
-  //     return;
-
-  //   setIsPTTUserSpeaking(false);
-  //   sendClientEvent({ type: "input_audio_buffer.commit" }, "commit PTT");
-  //   sendClientEvent({ type: "response.create" }, "trigger response PTT");
-  // };
 
   const onToggleConnection = () => {
     if (sessionStatus === "CONNECTED" || sessionStatus === "CONNECTING") {
