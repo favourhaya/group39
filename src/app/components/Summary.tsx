@@ -9,6 +9,13 @@ interface SummaryProps {
   items: TranscriptItem[];
 }
 
+const convertLinksToAnchorTags = (text: string) => {
+    return text.replace(
+      /(https?:\/\/[^\s)]+)/g, // Excludes closing parentheses `)` from the URL
+      `<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">$1</a>`
+    );
+  };
+
 const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
   const [summaryData, setSummaryData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,28 +29,6 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
 
     const fetchSummary = async () => {
       try {
-        // const transcript = [
-        //       {
-        //         "role": "assistant",
-        //         "content": "Hello! How are you today? What would you like to talk about? Maybe sports, music, or movies?"
-        //       },
-        //       {
-        //         "role": "user",
-        //         "content": "Ronaldo coolest swimmer. Brother of mine wants to be him"
-        //       },
-        //       {
-        //         "role": "assistant",
-        //         "content": "Did you mean: \"Ronaldo is the coolest football player. My brother wants to be like him.\"? Ronaldo is indeed a famous football (soccer) player! What does your brother admire about Ronaldo?"
-        //       },
-        //       {
-        //         "role": "user",
-        //         "content": "football not soccer"
-        //       },
-        //       {
-        //         "role": "assistant",
-        //         "content": "Got it! Football it is. Ronaldo is definitely a legendary football player. What qualities or skills of his does your brother find inspiring?"
-        //       },
-        //     ]
         const transcript = items
             .filter(item => item.type === "MESSAGE") // Filter only MESSAGE types
             .map(item => ({
@@ -173,8 +158,10 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
         <div className="mt-8 p-6 text-left">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Improvement Suggestions</h3>
             <ol className="list-decimal list-inside text-gray-700 space-y-3">
-            {summaryData.improvement_suggestions.slice(0, 3).map((suggestion, index) => (
-                <li key={index}>{suggestion}</li>
+            {summaryData.improvement_suggestions.slice(0, 3).map((suggestion: string, index) => (
+                // <li key={index}>{suggestion}</li>
+                <li key={index} dangerouslySetInnerHTML={{ __html: convertLinksToAnchorTags(suggestion) }} ></li>
+
             ))}
             </ol>
         </div>
