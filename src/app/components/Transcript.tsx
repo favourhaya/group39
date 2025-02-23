@@ -74,7 +74,8 @@ function Transcript({
   };
 
   return (
-    <div className="flex flex-col flex-1 bg-white min-h-0 rounded-xl">
+    <div className="flex flex-col flex-1 min-h-0 rounded-xl gradient-background">
+    <div className="flex flex-col flex-1 bg-white/65 min-h-0 rounded-xl">
       <div className="relative flex-1 min-h-0">
         <div className="absolute top-3 right-24 z-10 flex gap-2">
           <button
@@ -110,7 +111,7 @@ function Transcript({
                 );
               }
             }}
-            className="text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300"
+            className="text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300 shadow-md hover:shadow-md transition-all"
           >
             Analyze
           </button>
@@ -131,7 +132,7 @@ function Transcript({
               const isUser = role === "user";
               const baseContainer = "flex justify-end flex-col";
               const containerClasses = `${baseContainer} ${isUser ? "items-end" : "items-start"}`;
-              const bubbleBase = `max-w-lg p-3 rounded-xl ${isUser ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-black"}`;
+              const bubbleBase = `max-w-lg p-3 rounded-xl shadow-md ${isUser ? "bg-gray-900 text-gray-100" : "bg-white text-black"}`;
               const isBracketedMessage = title.startsWith("[") && title.endsWith("]");
               const messageStyle = isBracketedMessage ? "italic text-gray-400" : "";
               const displayTitle = isBracketedMessage ? title.slice(1, -1) : title;
@@ -139,7 +140,7 @@ function Transcript({
               return (
                 <div key={itemId} className={containerClasses}>
                   <div className={bubbleBase}>
-                    <div className={`text-xs ${isUser ? "text-gray-400" : "text-gray-500"} font-mono`}>
+                    <div className={`text-xs ${isUser ? "text-gray-300" : "text-gray-400"} font-mono`}>
                       {timestamp}
                     </div>
                     <div className={`whitespace-pre-wrap ${messageStyle}`}>
@@ -164,13 +165,13 @@ function Transcript({
         </div>
       </div>
 
-      <div className="p-4 flex items-center gap-x-2 flex-shrink-0 border-t border-gray-200">
+      <div className="p-4 flex items-center bg-white gap-x-2 flex-shrink-0 border-t border-white rounded-b-xl">
         <button
           onClick={() => setIsPTTActive(!isPTTActive)}
           className={`px-3 py-2 rounded-lg ${
             isPTTActive 
-              ? "bg-gray-100 hover:bg-gray-200 text-gray-700" 
-              : "bg-gray-600 hover:bg-gray-700 text-white"
+              ? "bg-gray-100 hover:bg-gray-200 shadow-md hover:shadow-md transition-all text-gray-700" 
+              : "bg-gray-600 hover:bg-gray-700 shadow-md hover:shadow-md transition-all text-white"
           }`}
         >
           <Image 
@@ -196,11 +197,12 @@ function Transcript({
         <button
           onClick={onSendMessage}
           disabled={!canSend || !userText.trim()}
-          className="bg-gray-900 text-white rounded-full px-2 py-2 disabled:opacity-50"
+          className="bg-gray-900 text-white rounded-full px-2 py-2 disabled:opacity-50 shadow-md hover:shadow-md transition-all"
         >
           <Image src="arrow.svg" alt="Send" width={24} height={24} />
         </button>
       </div>
+    </div>
     </div>
   );
 }
