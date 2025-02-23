@@ -45,9 +45,9 @@ function LandingPage({ onConnect }: LandingPageProps) {
         <div className="space-y-3 bg-white">
           <h3 className="font-bold text-blue-600 mb-2">How to Use ConvoAI</h3>
           <ol className="list-decimal list-inside space-y-2">
-            <li>Start a conversation with our AI</li>
-            <li>Speak naturally—our AI transcribes and analyzes your speech</li>
-            <li>Get instant feedback and improvement tips after each session</li>
+            <li>Start a conversation with your friendly AI English tutor.</li>
+            <li>Speak naturally—our AI transcribes and analyzes your speech.</li>
+            <li>Get instant feedback and improvement tips after each session.</li>
           </ol>
         </div>
       </Tooltip>
