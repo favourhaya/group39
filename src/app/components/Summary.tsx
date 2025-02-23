@@ -85,7 +85,7 @@ const Summary: React.FC<SummaryProps> = ({ onClose, items }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-5xl text-center">
+      <div className="bg-white p-6 rounded-xl shadow-lg w-full min-w-md max-w-5xl text-center">
         <h2 className="text-2xl font-bold mb-2">SUMMARY REPORT</h2>
         
         {loading ? (

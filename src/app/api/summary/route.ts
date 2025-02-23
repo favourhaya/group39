@@ -16,25 +16,22 @@ import fs from "fs/promises";
 const openai = new OpenAI();
 
 const AnalysisSchema = z.object({
-  overall_summary: z.string(),
-  fluency: z.string(),
-  correct_fluency: z.string(),
-  incorrect_fluency: z.string(),
-  clarity: z.string(),
-  correct_clarity: z.string(),
-  incorrect_clarity: z.string(),
-  grammar: z.string(),
-  correct_grammar: z.string(),
-  incorrect_grammar: z.string(),
-  coherence: z.string(),
-  correct_coherence: z.string(),
-  incorrect_coherence: z.string(),
-  vocab_variety: z.string(),
-  correct_variety: z.string(),
-  incorrect_variety: z.string(),
-  conclusion: z.string(),
-  rating: z.enum(["poor", "okay", "amazing"]),
-});
+    overall_summary: z.string(),
+  
+    correct_clarity: z.string(),
+    incorrect_clarity: z.string(),
+  
+    correct_grammar: z.string(),
+    incorrect_grammar: z.string(),
+  
+    correct_coherence: z.string(),
+    incorrect_coherence: z.string(),
+  
+  
+    conclusion: z.string(),
+    rating: z.enum(["poor", "good", "excellent"]),
+  });
+
 
 export async function POST(req: Request) {
   try {
@@ -50,37 +47,41 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content: `Your job is to analyze a user-chatbot conversation transcript in five areas: fluency, clarity, grammar, coherence, and vocabulary variety.
-          
-Format response as:
+          content: `Your job is to take a transcript between a user and a chatbot and analyze the user in 3 main areas: clarity, grammar, coherence.
+        
+Format your response like this:
 
 #overall_summary
-[Your overall summary here.]
+[Your overall summary here.] it should have a your this and this are good however your this could be better 
+this is only if there is anything positive or negative to say
 
-#fluency
-- Correct: [Example & explanation] 
-- Incorrect: [Example & explanation]
+Give a rating based on the following criteria which should also be strict on the user and not be afraid to say that they are doing poor or less okay:
+we are trusting you with this rating. If you are nice, you will betray that trust and destroy our relationship.
+for the ratings the excellent  it should mimic an native english speaker. 
 
-#clarity
-- Correct: [Example & explanation]
-- Incorrect: [Example & explanation]
 
-#grammar
-- Correct: [Example & explanation]
-- Incorrect: [Example & explanation]
+#clarity 
+- Correct: [Example of clear communication and why its correct]
+- Incorrect: [Example of unclear communication and why its incorrect]
 
-#coherence
-- Correct: [Example & explanation]
-- Incorrect: [Example & explanation]
+#grammar 
+- Correct: [Example of correct grammar and why its correct]
+- Incorrect: [Example of grammatical mistakes and why its incorrect]
 
-#vocab_variety
-- Correct: [Example & explanation]
-- Incorrect: [Example & explanation]
+#coherence 
+- Correct: [Example of logical, coherent speech and why its correct]
+- Incorrect: [Example of incoherence and why its incorrect]
 
-#conclusion
-Provide an overall conclusion with improvement suggestions.
-Also include a rating ("poor", "okay", or "amazing").
-Use an informal tone as if talking to a friend.`,
+#response_specification
+Give an overall conclusion of how they can improve.
+
+
+# when and when to not add info
+
+if a field example fluency.correct_examples doesn't have enough information based on the info to be filled out to a very high standard turn it into an empty string
+
+if there are little to no comments to make on a category or if the said category is very good compared to the other feel free to write very little about it
+the response should be directed to the user and it should also be informal like talking to a friend`,
         },
         // { role: "user", content: transcript },
         ...transcript
