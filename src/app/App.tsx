@@ -38,16 +38,13 @@ function App() {
   const pcRef = useRef<RTCPeerConnection | null>(null);
   const dcRef = useRef<RTCDataChannel | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
-  const [sessionStatus, setSessionStatus] =
-    useState<SessionStatus>("DISCONNECTED");
+  const [sessionStatus, setSessionStatus] = useState<SessionStatus>("DISCONNECTED");
 
-  const [isEventsPaneExpanded, setIsEventsPaneExpanded] =
-    useState<boolean>(true);
+  const [isEventsPaneExpanded, setIsEventsPaneExpanded] = useState<boolean>(true);
   const [userText, setUserText] = useState<string>("");
   const [isPTTActive, setIsPTTActive] = useState<boolean>(true);
-  const [isPTTUserSpeaking, setIsPTTUserSpeaking] = useState<boolean>(false);
-  const [isAudioPlaybackEnabled, setIsAudioPlaybackEnabled] =
-    useState<boolean>(true);
+  const [isPTTUserSpeaking, setIsPTTUserSpeaking] = useState<boolean>(true);
+  const [isAudioPlaybackEnabled, setIsAudioPlaybackEnabled] = useState<boolean>(true);
   
   const [showSummary, setShowSummary] = useState(false);
   const [showLanding, setShowLanding] = useState(true);
@@ -312,27 +309,27 @@ function App() {
     sendClientEvent({ type: "response.create" }, "trigger response");
   };
 
-  const handleTalkButtonDown = () => {
-    if (sessionStatus !== "CONNECTED" || dataChannel?.readyState !== "open")
-      return;
-    cancelAssistantSpeech();
+  // const handleTalkButtonDown = () => {
+  //   if (sessionStatus !== "CONNECTED" || dataChannel?.readyState !== "open")
+  //     return;
+  //   cancelAssistantSpeech();
 
-    setIsPTTUserSpeaking(true);
-    sendClientEvent({ type: "input_audio_buffer.clear" }, "clear PTT buffer");
-  };
+  //   setIsPTTUserSpeaking(true);
+  //   sendClientEvent({ type: "input_audio_buffer.clear" }, "clear PTT buffer");
+  // };
 
-  const handleTalkButtonUp = () => {
-    if (
-      sessionStatus !== "CONNECTED" ||
-      dataChannel?.readyState !== "open" ||
-      !isPTTUserSpeaking
-    )
-      return;
+  // const handleTalkButtonUp = () => {
+  //   if (
+  //     sessionStatus !== "CONNECTED" ||
+  //     dataChannel?.readyState !== "open" ||
+  //     !isPTTUserSpeaking
+  //   )
+  //     return;
 
-    setIsPTTUserSpeaking(false);
-    sendClientEvent({ type: "input_audio_buffer.commit" }, "commit PTT");
-    sendClientEvent({ type: "response.create" }, "trigger response PTT");
-  };
+  //   setIsPTTUserSpeaking(false);
+  //   sendClientEvent({ type: "input_audio_buffer.commit" }, "commit PTT");
+  //   sendClientEvent({ type: "response.create" }, "trigger response PTT");
+  // };
 
   const onToggleConnection = () => {
     if (sessionStatus === "CONNECTED" || sessionStatus === "CONNECTING") {
@@ -358,37 +355,37 @@ function App() {
     setSelectedAgentName(newAgentName);
   };
 
-  useEffect(() => {
-    const storedPushToTalkUI = localStorage.getItem("pushToTalkUI");
-    if (storedPushToTalkUI) {
-      setIsPTTActive(storedPushToTalkUI === "true");
-    }
-    const storedLogsExpanded = localStorage.getItem("logsExpanded");
-    if (storedLogsExpanded) {
-      setIsEventsPaneExpanded(storedLogsExpanded === "true");
-    }
-    const storedAudioPlaybackEnabled = localStorage.getItem(
-      "audioPlaybackEnabled"
-    );
-    if (storedAudioPlaybackEnabled) {
-      setIsAudioPlaybackEnabled(storedAudioPlaybackEnabled === "true");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedPushToTalkUI = localStorage.getItem("pushToTalkUI");
+  //   if (storedPushToTalkUI) {
+  //     setIsPTTActive(storedPushToTalkUI === "true");
+  //   }
+  //   const storedLogsExpanded = localStorage.getItem("logsExpanded");
+  //   if (storedLogsExpanded) {
+  //     setIsEventsPaneExpanded(storedLogsExpanded === "true");
+  //   }
+  //   const storedAudioPlaybackEnabled = localStorage.getItem(
+  //     "audioPlaybackEnabled"
+  //   );
+  //   if (storedAudioPlaybackEnabled) {
+  //     setIsAudioPlaybackEnabled(storedAudioPlaybackEnabled === "true");
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("pushToTalkUI", isPTTActive.toString());
-  }, [isPTTActive]);
+  // useEffect(() => {
+  //   localStorage.setItem("pushToTalkUI", isPTTActive.toString());
+  // }, [isPTTActive]);
 
-  useEffect(() => {
-    localStorage.setItem("logsExpanded", isEventsPaneExpanded.toString());
-  }, [isEventsPaneExpanded]);
+  // useEffect(() => {
+  //   localStorage.setItem("logsExpanded", isEventsPaneExpanded.toString());
+  // }, [isEventsPaneExpanded]);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "audioPlaybackEnabled",
-      isAudioPlaybackEnabled.toString()
-    );
-  }, [isAudioPlaybackEnabled]);
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "audioPlaybackEnabled",
+  //     isAudioPlaybackEnabled.toString()
+  //   );
+  // }, [isAudioPlaybackEnabled]);
 
   useEffect(() => {
     if (audioElementRef.current) {
