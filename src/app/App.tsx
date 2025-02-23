@@ -419,7 +419,7 @@ function App() {
         <div className="flex items-center">
           {showSummary && <Summary onClose={handleSummaryClose} />}
           <div>
-            Our cool project
+            ConvoAI
           </div>
         </div>
         <div className="flex items-center">

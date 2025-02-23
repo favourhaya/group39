@@ -74,7 +74,25 @@ function Transcript({
   };
 
   return (
-    <div className="flex flex-col flex-1 bg-white min-h-0 rounded-xl">
+    <div className="flex flex-col flex-1 min-h-0 rounded-xl"
+    style={{
+      backgroundImage: `
+        radial-gradient(18% 28% at 24% 50%, #CEFAFFFF 7%, #073AFF00 100%),
+        radial-gradient(18% 28% at 18% 71%, #FFFFFF59 6%, #073AFF00 100%),
+        radial-gradient(70% 53% at 36% 76%, #73F2FFFF 0%, #073AFF00 100%),
+        radial-gradient(42% 53% at 15% 94%, #FFFFFFFF 7%, #073AFF00 100%),
+        radial-gradient(42% 53% at 34% 72%, #FFFFFFFF 7%, #073AFF00 100%),
+        radial-gradient(18% 28% at 35% 87%, #FFFFFFFF 7%, #073AFF00 100%),
+        radial-gradient(31% 43% at 7% 98%, #FFFFFFFF 24%, #073AFF00 100%),
+        radial-gradient(21% 37% at 72% 23%, #D3FF6D9C 24%, #073AFF00 100%),
+        radial-gradient(35% 56% at 91% 74%, #8A4FFFF5 9%, #073AFF00 100%),
+        radial-gradient(74% 86% at 67% 38%, #6DFFAEF5 24%, #073AFF00 100%),
+        linear-gradient(125deg, #4EB5FFFF 1%, #4C00FCFF 100%)
+      `,
+      backgroundSize: '100% 100%',
+      backgroundPosition: '0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px',
+    }}>
+    <div className="flex flex-col flex-1 bg-white/65 min-h-0 rounded-xl">
       <div className="relative flex-1 min-h-0">
         <div className="absolute top-3 right-24 z-10 flex gap-2">
           <button
@@ -164,7 +182,7 @@ function Transcript({
         </div>
       </div>
 
-      <div className="p-4 flex items-center gap-x-2 flex-shrink-0 border-t border-gray-200">
+      <div className="p-4 flex items-center bg-white gap-x-2 flex-shrink-0 border-t border-white rounded-b-xl">
         <button
           onClick={() => setIsPTTActive(!isPTTActive)}
           className={`px-3 py-2 rounded-lg ${
@@ -201,6 +219,7 @@ function Transcript({
           <Image src="arrow.svg" alt="Send" width={24} height={24} />
         </button>
       </div>
+    </div>
     </div>
   );
 }
