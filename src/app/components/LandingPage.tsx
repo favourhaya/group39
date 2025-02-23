@@ -13,7 +13,7 @@ function LandingPage({ onConnect }: LandingPageProps) {
       <div className="flex flex-col items-center justify-center min-h-screen py-4 px-40 gradient-background">
         <h1 className="text-5xl text-blue-600 font-bold">ConvoAI</h1>
         <p className="text-gray-600 mb-8 font-sourGummy text-[48pt] text-center leading-[1.2]">
-          Get <em>instant</em> feedback on your Language Learning skills
+          Get instant <strong>feedback</strong> on your language learning skills
         </p>
         <button
           onClick={onConnect}
