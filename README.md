@@ -5,6 +5,7 @@ A multimodal agentic AI language learning assistant.
 ## Our UI
 ![Landing Page](public/landing_page.png)
 ![Sample Convo](public/sample_conversation.png)
+![Summary Report](public/summary_report.png)
 
 ## 🚀 Features
 - **Multimodal + Multi-Language Conversations**  
