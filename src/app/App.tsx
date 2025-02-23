@@ -28,7 +28,7 @@ import { allAgentSets, defaultAgentSetKey } from "@/app/agentConfigs";
 function App() {
   const searchParams = useSearchParams();
 
-  const { transcriptItems, addTranscriptMessage, addTranscriptBreadcrumb } =
+  const { transcriptItems, addTranscriptMessage, addTranscriptBreadcrumb, clearTranscript } =
     useTranscript();
   const { logClientEvent, logServerEvent } = useEvent();
 
@@ -405,6 +405,7 @@ function App() {
   }, [isAudioPlaybackEnabled]);
 
   const handleConnect = () => {
+    clearTranscript();
     setShowLanding(false);
     connectToRealtime();
   };
