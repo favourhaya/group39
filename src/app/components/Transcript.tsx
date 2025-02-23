@@ -78,7 +78,7 @@ function Transcript({
     <div className="flex flex-col flex-1 bg-white/65 min-h-0 rounded-xl">
       <div className="relative flex-1 min-h-0">
         <div className="absolute top-3 right-24 z-10 flex gap-2">
-          <button
+          {/* <button
             onClick={async () => {
               try {
                 if (!transcriptRef.current) return;
@@ -114,7 +114,7 @@ function Transcript({
             className="text-sm px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300 shadow-md hover:shadow-md transition-all"
           >
             Analyze
-          </button>
+          </button> */}
         </div>
 
         <div
