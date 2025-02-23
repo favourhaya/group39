@@ -15,8 +15,8 @@
 }
 
 body {
+  @apply font-poppins;
   color: var(--foreground);
   background: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  /* font-family: 'Poppins', Arial, Helvetica, sans-serif; */
 }

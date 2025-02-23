@@ -1,5 +1,5 @@
 import { AgentConfig } from "@/app/types";
-const { z } = require('zod'); 
+const { z } = require('zod');
 
 // Define schemas
 const AnalysisCategorySchema = z.object({

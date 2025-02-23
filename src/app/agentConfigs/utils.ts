@@ -68,5 +68,8 @@ export function injectTransferTools(agentDefs: AgentConfig[]): AgentConfig[] {
     );
   });
 
+  console.log(agentDefs);
+  
+
   return agentDefs;
 }

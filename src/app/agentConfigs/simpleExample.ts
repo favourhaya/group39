@@ -1,10 +1,9 @@
 import { AgentConfig } from "@/app/types";
-import { injectTransferTools } from "./utils";
 
 // Define agents
 const haiku: AgentConfig = {
   name: "haiku",
-  publicDescription: "Agent that writes haikus.", // Context for the agent_transfer tool
+  publicDescription: "Agent that helps user learn english", // Context for the agent_transfer tool
   instructions:
     `
     <role>
@@ -15,27 +14,17 @@ const haiku: AgentConfig = {
     If you don't understand them, then just say that you don't understand. 
     Please don't pretend you understand.
     </role> 
-    
-    Start the conversation with a question on an interesting topic, like sports, music or movies
+
+    Start the conversation with a question on an interesting topic like sports, music and movies.
     
     <example>
-    <Person>Iron Man apples eaten by him</Person>
+    <User>Iron Man apples eaten by him</User>
     <You>Did you mean: Did Iron Man eat apples</You>
     </example>
     `,
   tools: [],
 };
 
-const greeter: AgentConfig = {
-  name: "greeter",
-  publicDescription: "Agent that greets the user.",
-  instructions:
-    "",
-  tools: [],
-  downstreamAgents: [haiku],
-};
-
-// add the transfer tool to point to downstreamAgents
-const agents = injectTransferTools([greeter, haiku]);
+const agents = [haiku];
 
 export default agents;

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 
 // UI components
@@ -24,8 +23,6 @@ import { createRealtimeConnection } from "./lib/realtimeConnection";
 import { allAgentSets, defaultAgentSetKey } from "@/app/agentConfigs";
 
 function App() {
-  const searchParams = useSearchParams();
-
   const { transcriptItems, addTranscriptMessage, addTranscriptBreadcrumb, clearTranscript } =
     useTranscript();
   const { logClientEvent, logServerEvent } = useEvent();
@@ -74,21 +71,23 @@ function App() {
   });
 
   useEffect(() => {
-    let finalAgentConfig = searchParams.get("agentConfig");
-    if (!finalAgentConfig || !allAgentSets[finalAgentConfig]) {
-      finalAgentConfig = defaultAgentSetKey;
-      const url = new URL(window.location.toString());
-      url.searchParams.set("agentConfig", finalAgentConfig);
-      window.location.replace(url.toString());
-      return;
-    }
+    // let finalAgentConfig = searchParams.get("agentConfig");
+    // let finalAgentConfig = "simpleExample"
+    // if (!finalAgentConfig || !allAgentSets[finalAgentConfig]) {
+    //   finalAgentConfig = defaultAgentSetKey;
+    //   const url = new URL(window.location.toString());
+    //   url.searchParams.set("agentConfig", finalAgentConfig);
+    //   window.location.replace(url.toString());
+    //   return;
+    // }
 
+    let finalAgentConfig = defaultAgentSetKey;
     const agents = allAgentSets[finalAgentConfig];
     const agentKeyToUse = agents[0]?.name || "";
 
     setSelectedAgentName(agentKeyToUse);
     setSelectedAgentConfigSet(agents);
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     if (selectedAgentName && sessionStatus === "DISCONNECTED") {

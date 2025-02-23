@@ -12,6 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        poppins: ["Poppins", "Arial", "sans-serif"],
+        sourGummy: ["Sour Gummy", "comic sans", "sans-serif"]
+      }
     },
   },
   plugins: [],

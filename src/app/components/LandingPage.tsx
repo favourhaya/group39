@@ -6,11 +6,11 @@ interface LandingPageProps {
 
 function LandingPage({ onConnect }: LandingPageProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white rounded-xl p-8 shadow-lg max-w-md w-full text-center">
-        <h1 className="text-2xl font-bold mb-6">Welcome to Our Cool Project</h1>
-        <p className="text-gray-600 mb-8">
-          Connect to start a conversation with our AI assistant.
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-4 px-40">
+      {/* <div className="bg-white rounded-xl p-8 shadow-lg max-w-md w-full text-center"> */}
+        <h1 className="text-2xl font-bold">ConvoAI</h1>
+        <p className="text-gray-600 mb-8 font-sourGummy text-[64pt] text-center leading-[1.2]">
+            Get <em>instant</em> feedback on you Language Learning skills
         </p>
         <button
           onClick={onConnect}
@@ -18,7 +18,7 @@ function LandingPage({ onConnect }: LandingPageProps) {
         >
           Start Conversation
         </button>
-      </div>
+      {/* </div> */}
     </div>
   );
 }
